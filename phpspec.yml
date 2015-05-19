@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sirhum
+        psr4_prefix: Sirhum
+        src_path: app
