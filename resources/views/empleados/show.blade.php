@@ -2,19 +2,11 @@
 @section('content')
 
 <div class="container">
-<?php
-        $fecha=strtotime($empleado->fecha_nacimiento);
-        $fecha_ingreso=strtotime($empleado->fecha_ingreso);
-        $edad = (int)((time()-$fecha)/31556926);
-        $meses =array("","Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-        $escolaridad=array('Primaria','Secundaria','Bachillerato','Licenciatura','Maestria','Doctorado');
-        $tipo_e=['H'=>'HONORARIOS','B'=>'BASE','C'=>'CONFIANZA'];
-        ?>
 <div>
     <div class="pull-right hidden-print">
         <a href="{{ route('empleados.index') }}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Volver</a>
         <a href="{{ route('empleados.edit',$empleado->rfc) }}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar datos personales</a>
-        <a href="{{ route('hijos.show',$empleado->rfc) }}" class="btn btn-default"><i class="fa fa-users"></i> Editar hijos</a>
+        <a href="{{ route('hijos.show',$empleado->rfc) }}" class="btn btn-default"><i class="fa fa-child"></i> Editar hijos</a>
         <button type="submit" class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i> Imprimir</button>
     </div>
     <h1>Cardex</h1>
@@ -23,39 +15,9 @@
 @include('flash::message')
 <!-- contenedor-->
 <div class="row">
-    <div class="col-xs-3" id="datos">
-        @if(isset($empleado->datos->foto))
-        <div class="fondo_perfil">
-            <img class="perfil" src="{{ asset( $empleado->datos->foto ) }}" id="foto">
-        </div>
-        @else
-        <div class="fondo_perfil fondo_perfil_default">
-            <img class="perfil perfil_default" src="{{ URL::asset('images/perfil.png') }}" id="foto">
-            <p class="visible-print text-muted text-center">Sin Fotografia</p>
-        </div>
-        @endif
-        <h3 class="text-muted hidden-print">{{$empleado->nombre." ".$empleado->paterno." ".$empleado->materno}}</h3>
-        <h4 class="visible-print">{{$empleado->nombre." ".$empleado->paterno." ".$empleado->materno}}</h4>
-        <div class="row">
-            <p class="col-md-6">RFC<br><b>{{$empleado->rfc}}</b></p>
-            @if(isset($empleado->homoclave))
-                <p class="col-md-6">Homoclave<br><b>{{$empleado->homoclave}}</b></p>
-            @endif
-        </div>
-
-        <p>CURP<br><b>{{$empleado->curp}}</b></p>
-        <p>Fecha de nacimiento<br><b>{{strToUpper(date('d',$fecha).' de '.$meses[date('n',$fecha)].' de '.date('Y',$fecha)) }}</b></p>
-        <div class="row">
-            <p class="col-xs-6">Edad<br><b>{{$edad}} AÑOS</b></p>
-            <p class="col-xs-6">Sexo<br><b>{{$empleado->sexo}}</b></p>
-        </div>
-        <p>Correo<br><b>{{$empleado->correo}}</b></p>
-        @if(isset($empleado->tipo_sangre))
-        <p>Tipo de sangre<br><b>{{$empleado->tipo_sangre}}</b></p>
-        @endif
-    </div>
+    @include('empleados.partials.datos')
     <div class="col-xs-9 col-xs-9 contenedor_datos">
-        <div class="">
+        <div>
                 <legend class="text-muted">Datos Personales</legend>
                     <div class="row">
                         <p class="col-md-5 col-xs-6">Dirección<br><b>{{$empleado->datos->direccion}}</b></p>
@@ -72,7 +34,9 @@
                         @endif
                     </div>
                     <div class="row">
-                        <p class="col-md-3 col-xs-6">Escolaridad<br><b>{{strToUpper($escolaridad[$empleado->datos->escolaridad]) }}</b></p>
+                      @if($empleado->datos->escolaridad<=2)
+                        <p class="col-md-3 col-xs-6">Escolaridad<br><b>{{$empleado->datos->ultimoGrado}}</b></p>
+                      @endif
                         @if($empleado->datos->escolaridad>2)
                             <p class="col-md-3 col-xs-6">Licenciatura<br><b>{{ $empleado->datos->licenciatura }}</b></p>
                         @endif
@@ -138,9 +102,9 @@
                  <div id="datospersonales">
                  <legend class="text-muted">Datos laborales</legend>
                     <div class="row">
-                        <p class="col-xs-4">Tipo de Empleado<br><b>{{$tipo_e[$empleado->tipo] }}</b></p>
+                        <p class="col-xs-4">Tipo de Empleado<br><b>{{$empleado->tipoEmpleado }}</b></p>
                         <p class="col-xs-4">Número de Empleado<br><b>{{ $empleado->num_empleado }}</b></p>
-                        <p class="col-xs-4">Fecha de Ingreso<br><b>{{ date('d',$fecha_ingreso).'/'.strToUpper(substr($meses[date('n',$fecha_ingreso)],0,3)).'/'.date('Y',$fecha_ingreso) }}</b></p>
+                        <p class="col-xs-4">Fecha de Ingreso<br><b>{{ $empleado->fechaIng }}</b></p>
                     </div>
                     <div class="row">
                         <p class="col-xs-4">Tipo de Pago<br><b>{{ $empleado->tipo_pago==0? 'DEPOSITO BANCARIO':'CHEQUE' }}</b></p>
@@ -153,7 +117,7 @@
 
                 <div>
                     <div class="pull-right">
-                        <button class="btn btn-warning"> <i class="fa fa-edit"></i> Editar</button>   
+                        <button class="btn btn-warning"> <i class="fa fa-edit"></i> Editar</button>
                     </div>
                      <legend class="text-muted">Historial Laboral</legend>
                 </div>

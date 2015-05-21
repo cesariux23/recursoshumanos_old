@@ -150,7 +150,7 @@ class EmpleadosController extends Controller {
 		}
 
 		//asigna horario
-		if(null !== $request->get('horario')){
+		if($request->get('horario')!= ''){
 			$hor=EmpleadoHorario::create(array('empleado'=>$registro->id,'idhorario'=>$request->get('horario')));
 			Logs::create(array('idsesion'=>Session::get('sesion'),'idaccion'=>41,'tabla'=>'Horario','idobjeto'=>$hor->id,'complemento'=>'RFC: '.$empleado->rfc));
 		}

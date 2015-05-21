@@ -44,6 +44,7 @@ class EmpleadoPlaza extends Model {
     }
 
 
+
 //funciones
 
     /*

@@ -1,6 +1,16 @@
-<?php
+<?php namespace Sirhum\Http\Controllers;
 
-class HijosController extends \BaseController {
+use Session;
+use Sirhum\Http\Requests;
+use Sirhum\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
+
+use Sirhum\Empleado;
+use Sirhum\Hijos;
+use Sirhum\Logs;
+
+class HijosController extends Controller {
 
 	/**
 	 * Display a listing of hijos
@@ -11,7 +21,7 @@ class HijosController extends \BaseController {
 	{
 		$hijos = Hijos::all();
 
-		return View::make('hijos.index', compact('hijos'));
+		return view('hijos.index', compact('hijos'));
 	}
 
 	/**
@@ -21,7 +31,7 @@ class HijosController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('hijos.create');
+		return view('hijos.create');
 	}
 
 	/**
@@ -29,13 +39,13 @@ class HijosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		$data = Input::all();
+		$data = $request->all();
 		$h=Hijos::create($data);
 		Logs::create(array('idsesion'=>Session::getId(),'idaccion'=>31,'tabla'=>'Hijos','idobjeto'=>$h->id,'complemento'=>'RFC empleado:'.$data['rfc_empleado']));
-		Notification::success('Registrado correctamente.');
-		return Redirect::back();
+		flash()->success('Registrado correctamente.');
+		return redirect()->back();
 	}
 
 	/**
@@ -48,7 +58,7 @@ class HijosController extends \BaseController {
 	{
 		$empleado=Empleado::find($id);
 		$hijos=$empleado->hijos;
-		return View::make('hijos.show', compact('empleado','hijos'));
+		return view('hijos.show', compact('empleado','hijos'));
 	}
 
 	/**
@@ -61,7 +71,7 @@ class HijosController extends \BaseController {
 	{
 		$hijo = Hijos::find($id);
 
-		return View::make('hijos.edit', compact('hijo'));
+		return view('hijos.edit', compact('hijo'));
 	}
 
 	/**
@@ -74,11 +84,11 @@ class HijosController extends \BaseController {
 	{
 		$hijo = Hijos::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), Hijo::$rules);
+		$validator = Validator::make($data = $request->all(), Hijo::$rules);
 
 		if ($validator->fails())
 		{
-			return Redirect::back()->withErrors($validator)->withInput();
+			return route()->redirect()->back()->withErrors($validator)->withInput();
 		}
 
 		$hijo->update($data);
@@ -95,7 +105,7 @@ class HijosController extends \BaseController {
 	public function destroy($id)
 	{
 		Hijos::destroy($id);
-		Notification::success('Registro borrado correctamente.');
+		flash()->success('Registro borrado correctamente.');
 	}
 
 }

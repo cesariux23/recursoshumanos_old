@@ -6,11 +6,13 @@
 
   <div ng-init='datos={{$empleado->datos->toJson()}}; empleado={{$empleado->toJson()}}'>
     <div class="pull-right">
-      <a href="{{ URL::to('empleados') }}" class="btn btn-default"><i class="fa fa-times"></i> Cancelar</a>
+      <a href="{{ URL::previous()}}" class="btn btn-default"><i class="fa fa-times"></i> Cancelar</a>
       <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
     </div>
     <h1>Editar Información del Empleado</h1>
   </div>
+
+  <hr>
 
   <!-- contenedor-->
   <div class="row">

@@ -8,15 +8,18 @@
     </div>
     <h1>Empleados</h1>
   </div>
-  
+
   <div class="well">
-    <form class="form-horizontal" role="form" id="form_buscar" method="get">
+      {!! Form::model(Request::all(),array('route' => 'empleados.index', 'method' => 'GET')) !!}
       <legend>Busqueda</legend>
       <div class="row">
-        <div class=" col-md-4">
-          <input type="text" class="form-control" placeholder="RFC" name="RFC" ng-model="b.rfc">
+        <div class=" col-md-2">
+          <input type="text" class="form-control" placeholder="RFC" name="rfc" ng-model="b.rfc">
         </div>
-        <div class="col-md-6">
+        <div class=" col-md-4">
+          <input type="text" class="form-control" placeholder="Nombre" name="nombre" ng-model="b.nombre">
+        </div>
+        <div class="col-md-5">
           <select type="text" class="form-control" name="adscripcion" ng-model="b.id_adscripcion">
             <option value="">-- Todas las adscripciones --</option>
             @foreach($adscripciones as $a)
@@ -26,10 +29,10 @@
         </div>
         <div>
           <button class="btn btn-danger" type="button" ng-show="lista=(empleados| filter:b); lista.length<empleados.length" ng-click="b=null"><i class="fa fa-times"></i> Limpiar</button>
-          <button type="button" class="btn btn-success">Buscar</button>
+          <button type="submit" class="btn btn-success">Buscar</button>
         </div>
       </div>
-    </form>
+    {!!Form::close()!!}
   </div>
   <div class="alert" ng-show="lista.length<empleados.length" ng-class="{'alert-warning':lista.length==0,'alert-info':lista.length>0}">
     <div ng-show="lista.length==0">
@@ -39,7 +42,15 @@
     <p ng-show="lista.length>0">Se encontraron <b><%lista.length%></b> coincidencias.</p>
   </div>
 
-
+  @if($empleados->total()==0)
+  <div class="alert alert-warning">
+    <h3>Resultados</h3>
+    <p>No se encontraron resultados.</p>
+  </div>
+  @else
+  <p>
+    <b>{{$empleados->total()}}</b> empleado(s).
+  </p>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
@@ -73,6 +84,7 @@
       @endforeach
     </tbody>
   </table>
+  @endif
 
 
 

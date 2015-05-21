@@ -32,4 +32,10 @@ class DatosPersonales extends Model {
 			$this->attributes['curriculum']=$value;
 		}
 	}
+
+	public function getUltimoGradoAttribute()
+	{
+		$es=config('opciones.escolaridad');
+		return $es[$this->escolaridad];
+	}
 }

@@ -1,10 +1,10 @@
 .fondo_perfil{
-	background-color: #ccc;
+	background-color: none;
 	position: relative;
 }
 .fondo_perfil_default{
-  border-style: solid;
-  border-color: #ccc;
+  border-style: none;
+
 }
 .perfil{
   width: 100%;
@@ -77,7 +77,7 @@ input.ng-valid, select.ng-valid {
   input.ng-valid-required, select.ng-valid-required {
     border-left: #5CB85C;
 	border-left-style: solid;
-  }	
+  }
 
 input.ng-valid-pattern {
     border-left: #5CB85C;
@@ -96,7 +96,7 @@ input.ng-valid-pattern {
  /*Tabla modal*/
 #table-scroll {
   height:250px;
-  overflow:auto;  
+  overflow:auto;
   margin-top:20px;
 }
 
