@@ -79,24 +79,7 @@
                     </table>
                     @if(count($empleado->hijos)>0)
                     <legend class="text-muted">Hijos</legend>
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>CURP</th>
-                                <th>Nombre</th>
-                                <th>Fecha de nacimiento</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($empleado->hijos as $h)
-                            <tr>
-                                <td>{{$h->curp}}</td>
-                                <td>{{$h->nombre}}</td>
-                                <td>{{$h->fecha_nac}}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                    @include('hijos.tabla',['hijos'=>$empleado->hijos])
                     @endif
 
                  <div id="datospersonales">
@@ -107,7 +90,7 @@
                         <p class="col-xs-4">Fecha de Ingreso<br><b>{{ $empleado->fechaIng }}</b></p>
                     </div>
                     <div class="row">
-                        <p class="col-xs-4">Tipo de Pago<br><b>{{ $empleado->tipo_pago==0? 'DEPOSITO BANCARIO':'CHEQUE' }}</b></p>
+                        <p class="col-xs-4">Tipo de Pago<br><b>{{ $empleado->pago }}</b></p>
                         @if($empleado->tipo_pago==0)
                         <p class="col-xs-4">Banco<br><b>{{ $empleado->catbanco->banco}}</b></p>
                         <p class="col-xs-4">Cuenta<br><b>{{ $empleado->cuenta }}</b></p>
@@ -117,7 +100,7 @@
 
                 <div>
                     <div class="pull-right">
-                        <button class="btn btn-warning"> <i class="fa fa-edit"></i> Editar</button>
+                        <button class="btn btn-warning hidden-print"> <i class="fa fa-edit"></i> Editar</button>
                     </div>
                      <legend class="text-muted">Historial Laboral</legend>
                 </div>
@@ -153,6 +136,7 @@
             </div>
         </div>
 
+</div>
 </div>
 
         @stop

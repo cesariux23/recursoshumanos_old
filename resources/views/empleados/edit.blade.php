@@ -24,7 +24,7 @@
         @else
         <img class="perfil perfil_default" src="{{ URL::asset('images/perfil.png') }}" id="foto">
         @endif
-        <span class="btn btn-success fileinput-button">
+        <span class="btn btn-warning fileinput-button">
           <i class="fa fa-refresh"></i>
           <span>Cambiar Foto</span>
           <input type="file"id="files" name="foto">

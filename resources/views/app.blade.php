@@ -39,7 +39,14 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="{{ route('empleados.index') }}"><i class="fa fa-users"></i> Empleados</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-tags"></i> Catálogos <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ url('/auth/logout') }}">Salir</a></li>
+						</ul>
+					</li>
 				</ul>
+
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())

@@ -36,7 +36,7 @@
 		<div class="col-md-3">
 			<div class="fondo_perfil">
 				<img class="perfil" src="{{ URL::asset('images/perfil.png') }}" id="foto" ng-class="{perfil_default:!foto}">
-				<span class="btn btn-info fileinput-button">
+				<span class="btn btn-warning fileinput-button">
 					<i class="glyphicon glyphicon-plus"></i>
 					<span>Agregar Foto</span>
 					<input type="file"  id="files" name="foto"  fileread="foto">

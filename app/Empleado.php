@@ -48,13 +48,13 @@ class Empleado extends Model {
 	public function getFechaNacAttribute()
 	{
 		# Regresa la fecha de nacimiento
-		return $this->fecha($this->fecha_nacimiento,false);
+		return $this->fecha($this->fecha_nacimiento);
 	}
 
 	public function getFechaIngAttribute()
 	{
 		# Regresa la fecha de nacimiento
-		return $this->fecha($this->fecha_ingreso,true);
+		return $this->fecha($this->fecha_ingreso);
 	}
 
 	public function getEdadAttribute()
@@ -68,21 +68,21 @@ class Empleado extends Model {
 			# Regresa el tipo de empleado
 			return $this->tipos[$this->tipo];
 	}
+	public function getPagoAttribute()
+	{
+			# Regresa el tipo de pago
+			$pagos=config('opciones.pagos');
+			return $pagos[$this->tipo_pago];
+	}
+
 
 	//da formato a las fechas que se necesiten
-	public function fecha($fecha,$corta)
+	public function fecha($fecha)
 	{
 		$meses=config('opciones.meses');
 		$fecha=strtotime($fecha);
-		if($corta){
-			$mes=substr($meses[date('n',$fecha)],0,3);
-			$separador='/';
-		}
-		else{
-			$mes=$meses[date('n',$fecha)];
-			$separador=' de ';
-		}
-
+		$mes=substr($meses[date('n',$fecha)],0,3);
+		$separador='/';
 
 		return date('d',$fecha).$separador.$mes.$separador.date('Y',$fecha);
 	}

@@ -43,7 +43,7 @@ class HijosController extends Controller {
 	{
 		$data = $request->all();
 		$h=Hijos::create($data);
-		Logs::create(array('idsesion'=>Session::getId(),'idaccion'=>31,'tabla'=>'Hijos','idobjeto'=>$h->id,'complemento'=>'RFC empleado:'.$data['rfc_empleado']));
+		Logs::create(array('idsesion'=>Session::get('sesion'),'idaccion'=>31,'tabla'=>'Hijos','idobjeto'=>$h->id,'complemento'=>'RFC empleado:'.$data['rfc_empleado']));
 		flash()->success('Registrado correctamente.');
 		return redirect()->back();
 	}

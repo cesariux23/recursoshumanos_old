@@ -8,28 +8,23 @@
     </div>
     <h1>Empleados</h1>
   </div>
-
+  @include('flash::message')
   <div class="well">
       {!! Form::model(Request::all(),array('route' => 'empleados.index', 'method' => 'GET')) !!}
       <legend>Busqueda</legend>
       <div class="row">
         <div class=" col-md-2">
-          <input type="text" class="form-control" placeholder="RFC" name="rfc" ng-model="b.rfc">
+          {!!Form::text('rfc', null, ['class'=>'form-control','placeholder'=>'RFC','ng-model'=>"b.rfc"])!!}
         </div>
         <div class=" col-md-4">
-          <input type="text" class="form-control" placeholder="Nombre" name="nombre" ng-model="b.nombre">
+          {!!Form::text('nombre', null, ['class'=>'form-control','placeholder'=>'Nombre','ng-model'=>"b.nombre"])!!}
         </div>
         <div class="col-md-5">
-          <select type="text" class="form-control" name="adscripcion" ng-model="b.id_adscripcion">
-            <option value="">-- Todas las adscripciones --</option>
-            @foreach($adscripciones as $a)
-            <option value="{{$a->id}}">{{$a->adscripcion}}</option>
-            @endforeach
-          </select>
+          {!!Form::select('adscripcion', $adscripciones, null, array("class"=>"form-control"))!!}
         </div>
         <div>
           <button class="btn btn-danger" type="button" ng-show="lista=(empleados| filter:b); lista.length<empleados.length" ng-click="b=null"><i class="fa fa-times"></i> Limpiar</button>
-          <button type="submit" class="btn btn-success">Buscar</button>
+          <button type="submit" class="btn btn-default"> <i class="fa fa-search"></i> Buscar</button>
         </div>
       </div>
     {!!Form::close()!!}
@@ -84,6 +79,7 @@
       @endforeach
     </tbody>
   </table>
+  {!!$empleados->appends(Request::only('nombre','rfc','adscripcion'))->render()!!}
   @endif
 
 
