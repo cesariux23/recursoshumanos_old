@@ -1,5 +1,4 @@
 <?php
-use Sirhum\Municipios;
 return array(
   'escolaridad'=>[
     ''=>'-- Seleccione --',
@@ -18,6 +17,26 @@ return array(
       '0'=>'DEPOSITO BANCARIO',
       '1'=>'CHEQUE'
       ],
-    'meses'=>array("","Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+    'meses'=>array(
+        "",
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+      ),
+      'catalogos'=>array(
+        "adscripciones",
+        "plazas",
+        "tabulador",
+        "horarios"
+      )
   );
   ?>

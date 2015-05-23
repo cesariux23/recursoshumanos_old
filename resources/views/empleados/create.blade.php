@@ -9,6 +9,7 @@
 <div ng-controller="registroempleadosctl" ng-init="empleado.tipo='H';
 				fplaza.tipo='H';
 				empleado.tipo_pago=0;
+				empleado.estado=0;
 				panel=1;
 				datos.estado_civil=0;
 				cargo.tipo='H';

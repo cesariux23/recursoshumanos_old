@@ -26,7 +26,7 @@ Route::controllers([
 Route::resource('empleados', 'EmpleadosController');
 
 //Catalogos
-Route::resource('catalogos', 'CatalogoController');
+Route::resource('catalogos', 'CatalogosController');
 
 //rest
 Route::resource('restempleados', 'RestEmpleadosController');

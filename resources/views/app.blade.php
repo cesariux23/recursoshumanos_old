@@ -42,7 +42,10 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-tags"></i> Catálogos <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="{{ url('/auth/logout') }}">Salir</a></li>
+							<?php $catalogos=config('opciones.catalogos')?>
+							@for ($i = 0; $i < sizeof($catalogos); $i++)
+							<li><a href="{{ route('catalogos.show',$catalogos[$i]) }}"> {{ucfirst($catalogos[$i])}} </a></li>
+							@endfor
 						</ul>
 					</li>
 				</ul>
