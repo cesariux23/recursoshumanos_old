@@ -1,0 +1,1 @@
+@include('catalogos.'.$catalogo.'.tabla')

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use Sirhum\Plazas;
 use Sirhum\Adscripcion;
+use Sirhum\Tabulador;
+use Sirhum\Horarios;
 
 class CatalogosController extends Controller {
 
@@ -54,13 +56,48 @@ class CatalogosController extends Controller {
 			case 'plazas':
 				# code...
 				$datos=[];
-				$datos['H']=Plazas::where('tipo','H')->orderBy('clave', 'ASC')->get();
-				$datos['B']=Plazas::where('tipo','B')->orderBy('clave', 'ASC')->get();
-				$datos['C']=Plazas::where('tipo','C')->orderBy('clave', 'ASC')->get();
+				$datos['H']=Plazas::where('tipo','H')
+				->orderBy('nivel', 'ASC')
+				->orderBy('clave', 'ASC')
+				->get();
+				$datos['B']=Plazas::where('tipo','B')
+				->orderBy('nivel', 'ASC')
+				->orderBy('clave', 'ASC')
+				->get();
+				$datos['C']=Plazas::where('tipo','C')
+				->orderBy('nivel', 'ASC')
+				->orderBy('clave', 'ASC')
+				->get();
 				break;
-			case 'adscripciones':
-				$datos=Adscripcion::paginate();
-				$datos->setPath('public/catalogos/adscripciones');
+
+			case 'tabulador':
+				# code...
+				$datos=[];
+				$datos['H']=Tabulador::where('tipo','H')
+				->orderBy('zona_eco', 'ASC')
+				->orderBy('nivel', 'ASC')
+				->orderBy('clave', 'ASC')
+				->get();
+				$datos['B']=Tabulador::where('tipo','B')
+				->orderBy('zona_eco', 'ASC')
+				->orderBy('nivel', 'ASC')
+				->orderBy('clave', 'ASC')
+				->get();
+				$datos['C']=Tabulador::where('tipo','C')
+				->orderBy('zona_eco', 'ASC')
+				->orderBy('nivel', 'ASC')
+				->orderBy('clave', 'ASC')
+				->get();
+				break;
+				case 'adscripciones':
+					$datos=Adscripcion::paginate();
+					$datos->setPath('public/catalogos/adscripciones');
+
+					break;
+			case 'horarios':
+				# code...
+				$datos=Horarios::all();
+				break;
 			default:
 				# code...
 				break;

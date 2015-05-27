@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', function ()
+{
+	# code...
+	return redirect()->route('empleados.index');
+});
 
 Route::get('home', 'HomeController@index');
 
