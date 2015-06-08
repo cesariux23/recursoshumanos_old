@@ -1,17 +1,25 @@
 angular.module('RecursosHumanosApp')
 .controller('registroempleadosctl', ['$scope','Tabulador','$http', '$filter','Empleados', function($scope, Tabulador, $http, $filter,Empleados){
-	//$scope.plazas=Plazas.query();
-	$scope.tabulador=Tabulador.query();
-	$scope.sueldo={};
-	$scope.hijosform=false;
-	$scope.hijos=[];
-	$scope.hijo={};
-	$scope.plaza={};
 	hoy=new Date();
 	actual= hoy.getFullYear();
 	act=Number(String(actual).substring(2,4));
 
-	$scope.hoy=$filter('date')(hoy,'dd/MM/yyyy');
+	$scope.hoy=$filter('date')(hoy,'yyyy/MM/dd');
+	$scope.tabulador=Tabulador.query();
+	//$scope.sueldo={empleado:0};
+	$scope.hijosform=false;
+	$scope.hijos=[];
+	$scope.hijo={};
+	$scope.plaza={};
+	$scope.fplaza={tipo:'H'};
+	$scope.datos={estado_civil:0,tiene_hijos:false, hijos:0, hijosmenores:0};
+	$scope.cargo={tipo:'H',ocupacion:false, inicio:$scope.hoy};
+
+	$scope.empleado={tipo:'H',tipo_pago:0, hijosmenores:false,estado:0,fecha_ingreso:$scope.hoy};
+	$scope.panel=1;
+	$scope.sph='----';
+
+
 	//cambia el tipo de empleado
 	$scope.cambiatipo=function (t) {
 		// Acciones diversas
@@ -20,14 +28,17 @@ angular.module('RecursosHumanosApp')
 			$scope.fplaza={tipo:t, zona_eco:''};
 		}
 		$scope.cargo.tipo=t;
+		$scope.cargo.clave_plaza=null;
 		$scope.fplaza.tipo=t;
-		$scope.sueldo.sueldo_bruto=null;
-		$scope.sueldo.compensacion=null;
+		//$scope.sueldo.sueldo_bruto=null;
+		//$scope.sueldo.compensacion=null;
 
 	}
 	$scope.asigna_plaza=function (p) {
 		// asigna la plaza seleccionada
 		$scope.plaza=p;
+
+		/*
 		//asigna monotos del sueldo a base y confianza
 		if($scope.empleado.tipo!='H'){
 			$scope.sueldo.sueldo_bruto=parseFloat(p.sueldo_bruto).toFixed(2);
@@ -41,6 +52,8 @@ angular.module('RecursosHumanosApp')
 			$scope.sph="Max. "+p.sueldo_max;
 			$scope.sueldo.compensacion=null;
 		}
+
+		*/
 		//asigna la clave de la plaza
 		$scope.cargo.clave_plaza=$scope.plaza.clave;
 
@@ -67,12 +80,22 @@ angular.module('RecursosHumanosApp')
 						anio+=2000;
 					mes=rfc.substring(6,8);
 					dia=rfc.substring(8,10);
-					$('#femp').datepicker('update',anio+"/"+mes+"/"+dia);
+					//$('#femp').datepicker('update',anio+"/"+mes+"/"+dia);
+					$scope.empleado.fecha_nacimiento=anio+"/"+mes+"/"+dia;
 
 					//inicializa CURP
 					$scope.empleado.curp=rfc;
 				}
 		  });
+		}
+	}
+	//llena el campo de genero
+	$scope.llenagenero=function () {
+		curp=$scope.empleado.curp;
+		//valida que este correcto
+		if(curp.length==18){
+			$scope.empleado.sexo=curp.substring(10,11);
+			//$scope.empleado.sexo= s=='H'? 'M': 'F';
 		}
 	}
 
@@ -124,8 +147,8 @@ angular.module('RecursosHumanosApp')
 	// agrega hijos a la lista
 	if ($scope.hijo)
 		if($scope.hijo.nombre)
-			if ($scope.hijo.curp)
-				if ($scope.hijo.fecha_nac)
+			//if ($scope.hijo.curp)
+				//if ($scope.hijo.fecha_nac)
 					if ($scope.hijo.sexo) {
 						$scope.hijos.push($scope.hijo);
 						$scope.hijo={};
@@ -133,10 +156,12 @@ angular.module('RecursosHumanosApp')
 					}
 					else
 						$scope.erroreshijo.push('Seleccione un sexo.');
+						/*
 					else
 						$scope.erroreshijo.push('Ingrese una fecha de nacimiento.');
 					else
 						$scope.erroreshijo.push('Ingrese una CURP valida.');
+						*/
 					else
 						$scope.erroreshijo.push('Ingrese el nombre.');
 					else

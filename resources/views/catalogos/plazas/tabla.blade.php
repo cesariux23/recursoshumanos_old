@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     @foreach($plazas as $p)
-    <tr>
+    <tr {{$p->autorizadas>$p->ocupadas? 'class="danger"': ''}})>
       <td>{{ $p->clave }}</td>
       <td>{{ $p->descripcion }}</td>
       <td>{{ $p->nivel }}</td>

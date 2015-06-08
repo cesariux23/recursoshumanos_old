@@ -66,8 +66,8 @@ class EmpleadosController extends Controller {
 	{
 		Logs::create(array('idsesion'=>Session::get('sesion'),'idaccion'=>21,'tabla'=>'empleado'));
 
-		$bancos=Bancos::all();
-		$municipios=[''=>'--seleccione--']+Municipios::lists('municipio','id');
+		$bancos=[''=>'-- Seleccione --']+Bancos::lists('banco','id');
+		$municipios=[''=>'-- Seleccione --']+Municipios::lists('municipio','id');
 		$adscripciones=Adscripcion::all();
 		$horarios=Horarios::all();
 		$plazas=Plazas::all();
@@ -130,6 +130,8 @@ class EmpleadosController extends Controller {
 		$registro=EmpleadoPlaza::create((array)$plaza);
 		//log
 		Logs::create(array('idsesion'=>Session::get('sesion'),'idaccion'=>41,'tabla'=>'Cargo','idobjeto'=>$registro->id,'complemento'=>'RFC: '.$empleado->rfc.', Plaza: '.$plaza->clave_plaza.', Adscripcion: '.$plaza->adscripcion));
+
+		/*
 		//se recuperan los datos del sueldo
 		$sueldo=json_decode($request->get('sueldo_emp'));
 		//se guarda el registro, se envia la fecha de ingreso al instituto
@@ -140,7 +142,7 @@ class EmpleadosController extends Controller {
 
 		//calcula las deducciones que tienen los empleados por default
 		$this->calculaDeduccionesAuto($registro, $empleado->fecha_ingreso);
-
+		*/
 		/*****/
 		//registra hijos
 		foreach (json_decode($_POST['hijos']) as $h) {
@@ -170,6 +172,19 @@ class EmpleadosController extends Controller {
 	public function show($id)
 	{
 		$empleado = Empleado::findOrFail($id);
+		//valida si tiene hijos o no
+		if(count($empleado->hijos)>0){
+			//no se ha marcado
+		 	if(!$empleado->datos->hijos){
+				$empleado->datos->hijos=1;
+				$empleado->datos->hijosmenores=1;
+			}
+
+			//valida las edades de los hijos
+			$empleado->save();
+
+		}
+
 		Logs::create(array('idsesion'=>Session::get('sesion'),'idaccion'=>22,'tabla'=>'empleado','idobjeto'=>$id));
 		return view('empleados.show', compact('empleado'));
 	}
@@ -184,9 +199,11 @@ class EmpleadosController extends Controller {
 	{
 		Logs::create(array('idsesion'=>Session::get('sesion'),'idaccion'=>23,'tabla'=>'empleado','idobjeto'=>$id));
 		$empleado = Empleado::find($id);
-		$municipios=Municipios::all()->lists('municipio','id');
-		$bancos=Bancos::all()->lists('banco','id');
-		return view('empleados.edit', compact('empleado','municipios','bancos'));
+		$municipios=[''=>'-- Seleccione --']+Municipios::lists('municipio','id');
+		$bancos=[''=>'-- Seleccione --']+Bancos::lists('banco','id');
+		$editar=true;
+		$horarios=Horarios::all();
+		return view('empleados.edit', compact('empleado','municipios','bancos','horarios','editar'));
 		//var_dump($empleado);
 	}
 

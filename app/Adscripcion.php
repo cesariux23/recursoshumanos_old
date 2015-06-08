@@ -11,7 +11,7 @@ class Adscripcion extends Model {
 	public function empleados()
 	{
 		# code...
-		return $this->hasMany('Sirhum\EmpleadoPlaza','adscripcion','id')->whereNotNull('fin');
+		return $this->hasMany('Sirhum\EmpleadoPlaza','adscripcion','id')->whereNull('fin');
 	}
 
 	public function getNumEmpleadosAttribute()

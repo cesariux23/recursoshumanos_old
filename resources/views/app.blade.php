@@ -24,6 +24,10 @@
 	<![endif]-->
 </head>
 <body>
+	<!-- muestra spinner -->
+	<div id="cover">
+		<div class="cargando">Esto tomará un segundo <b>:)</b></div>
+	</div>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -37,6 +41,7 @@
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				@if (!Auth::guest())
 				<ul class="nav navbar-nav">
 					<li><a href="{{ route('empleados.index') }}"><i class="fa fa-users"></i> Empleados</a></li>
 					<li class="dropdown">
@@ -49,6 +54,7 @@
 						</ul>
 					</li>
 				</ul>
+				@endif
 
 
 				<ul class="nav navbar-nav navbar-right">

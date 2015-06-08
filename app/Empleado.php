@@ -76,6 +76,17 @@ class Empleado extends Model {
 	}
 
 
+
+	public function setBancoAttribute($banco)
+	{
+			# asigna el valor del banco
+			if($banco==''){
+				$banco=null;
+			}
+			$this->banco=$banco;
+	}
+
+
 	//da formato a las fechas que se necesiten
 	public function fecha($fecha)
 	{

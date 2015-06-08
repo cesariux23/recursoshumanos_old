@@ -7,7 +7,8 @@ return array(
     '2'=>'BACHILLERATO',
     '3'=>'LICENCIATURA',
     '4'=>'MAESTRIA',
-    '5'=>'DOCTORADO'
+    '5'=>'DOCTORADO',
+    '6'=>'OTRO'
     ],
     'estadocivil'=>[
       '0'=>'SOLTERO',

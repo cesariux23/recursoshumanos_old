@@ -1,21 +1,9 @@
 @extends('app')
 @section('content')
 <div class="container">
-	<script type="text/ng-template" id="errores">
-	<dd ng-message="required">Campo requerido.</dd>
-	<dd ng-message="pattern">Valor no valido.</dd>
-</script>
+	@include('empleados.partials.plantillaerror')
 
-<div ng-controller="registroempleadosctl" ng-init="empleado.tipo='H';
-				fplaza.tipo='H';
-				empleado.tipo_pago=0;
-				empleado.estado=0;
-				panel=1;
-				datos.estado_civil=0;
-				cargo.tipo='H';
-				sueldo.empleado=0;
-				cargo.ocupacion=false;
-				sph='----'">
+<div ng-controller="registroempleadosctl">
 	{!! Form::open(array('route' => 'empleados.store', 'files' => true, 'name'=>'registro')) !!}
 	<div>
 		<div class="pull-right">
@@ -43,7 +31,7 @@
 					<input type="file"  id="files" name="foto"  fileread="foto">
 				</span>
 			</div>
-			<br>
+
 			<!--Errores de llenado -->
 			@include('empleados.partials.erroresregistro')
 		</div>
@@ -52,24 +40,30 @@
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs" role="tablist">
 				<li class="active"><a href="#datos_personales" role="tab" data-toggle="tab" ng-click="panel=1">Datos personales</a></li>
-				<li><a href="#datos_generales" role="tab" data-toggle="tab" ng-click="panel=2">Datos Generales</a></li>
+				<li><a href="#datos_generales" role="tab" data-toggle="tab" ng-click="panel=2">Formación profesional</a></li>
 				<li><a href="#datos_laborales" role="tab" data-toggle="tab" ng-click="panel=3">Datos laborales</a></li>
-				<li><a href="#datos_hijos" role="tab" data-toggle="tab" ng-click="panel=4">Hijos</a></li>
+				<li><a href="#datos_hijos" role="tab" data-toggle="tab" ng-click="panel=4" ng-show='datos.hijosmenores==1'>Hijos menores de edad</a></li>
 			</ul>
 
 			<!-- Tab panes -->
 			<!-- Datos Personales -->
 			<div class="tab-content">
+				<div class="tab-pane active" id="datos_personales">
+				  <br>
 				@include('empleados.partials.datospersonales')
+			</div>
 					<!--Datos Generales-->
 					<div class="tab-pane" id="datos_generales">
 					  <br>
-					  <div class="well">
-							@include('empleados.partials.datosgen')
+					  <div>
+							@include('empleados.partials.datosformacion')
 						</div>
 					</div>
 					<!--Datos Laborales-->
+					<div class="tab-pane" id="datos_laborales">
+					  <br>
 					@include('empleados.partials.datoslaborales')
+				</div>
 					<!--Hijos-->
 					@include('empleados.partials.datoshijos')
 				</div>

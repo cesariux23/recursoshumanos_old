@@ -43,3 +43,18 @@ $(document).on("keydown", function (e) {
 		e.preventDefault();
 	}
 });
+
+$(window).load(function(){
+	$('#cover').fadeOut(100);
+});
+
+//valida la clave de un campo clave valor
+
+$(".txt").on("focusout", function () {
+	opcion=$('#id'+this.id+' option:selected').html();
+	if(opcion.length==0){
+		alert('Ingrese una clave valida');
+		this.value=""
+		angular.element(this).triggerHandler('input')
+	}
+});

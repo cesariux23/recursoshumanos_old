@@ -105,3 +105,23 @@ input.ng-valid-pattern {
     font-size: 10px;
   }
 }
+
+#cover {
+    background: url("35.GIF") no-repeat scroll center center #FFF;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+		z-index: 1000;
+		opacity: 0.8;
+}
+
+.cargando{
+	width: 700px ;
+	margin-left: auto ;
+	margin-right: auto ;
+	position: relative;
+	top:60%;
+	font-size:20px;
+	text-align:center;
+
+}

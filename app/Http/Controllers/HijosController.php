@@ -43,6 +43,9 @@ class HijosController extends Controller {
 	{
 		$data = $request->all();
 		$h=Hijos::create($data);
+		\DB::table('datos_personales')
+            ->where('rfc', $h->rfc_empleado)
+            ->update(array('hijos' => 1,'hijosmenores'=>1));
 		Logs::create(array('idsesion'=>Session::get('sesion'),'idaccion'=>31,'tabla'=>'Hijos','idobjeto'=>$h->id,'complemento'=>'RFC empleado:'.$data['rfc_empleado']));
 		flash()->success('Registrado correctamente.');
 		return redirect()->back();
@@ -88,7 +91,7 @@ class HijosController extends Controller {
 
 		if ($validator->fails())
 		{
-			return route()->redirect()->back()->withErrors($validator)->withInput();
+			return redirect()->back()->withErrors($validator)->withInput();
 		}
 
 		$hijo->update($data);
@@ -102,10 +105,19 @@ class HijosController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy(Request $request, $id)
 	{
-		Hijos::destroy($id);
+		$hijo=Hijos::find($request->input('id'));
+		$rfc=$hijo->rfc_empleado;
+		Hijos::destroy($request->input('id'));
+		//ajusta los valores de hijos a empleados
+		$empleado=Empleado::find($rfc);
+		if(count($empleado->hijos)==0){
+			$empleado->datos->hijosmenores=0;
+			$empleado->datos->save();
+		}
 		flash()->success('Registro borrado correctamente.');
+		return redirect()->route('hijos.show',$rfc);
 	}
 
 }
