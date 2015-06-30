@@ -217,15 +217,6 @@ class EmpleadosController extends Controller {
 	{
 		$empleado = Empleado::findOrFail($id);
 		$data = $request->all();
-		/*
-		$validator = Validator::make($data = Input::all(), Empleado::$rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
-		*/
-
 		$empleado->update($data);
 		//se sube la foto
 		$datos=$data['datos'];

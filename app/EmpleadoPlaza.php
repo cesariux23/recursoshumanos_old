@@ -32,6 +32,7 @@ class EmpleadoPlaza extends Model {
         return $this->catplaza->descripcion;
     }
 
+
     public function catadscripcion()
     {
         return $this->belongsTo('Sirhum\Adscripcion','adscripcion','id');
@@ -111,4 +112,20 @@ class EmpleadoPlaza extends Model {
         $s->save();
         Logs::create(array('idsesion'=>Session::get('sesion'),'idaccion'=>41,'tabla'=>'Deduccion','idobjeto'=>$s->id,'complemento'=>$texto));
     }
+
+		//da formato a las fechas que se necesiten
+		public function fecha($fecha)
+		{
+			$meses=config('opciones.meses');
+			$fecha=strtotime($fecha);
+			$mes=substr($meses[date('n',$fecha)],0,3);
+			$separador='/';
+
+			return date('d',$fecha).$separador.$mes.$separador.date('Y',$fecha);
+		}
+
+		function getFechaInicioAttribute()
+		{
+			return $this->fecha($this->inicio);
+		}
 }

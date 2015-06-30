@@ -10,7 +10,6 @@ class Empleado extends Model {
 	protected $fillable = ['rfc','homoclave','num_empleado','nombre','paterno','materno','curp','tipo','fecha_nacimiento','sexo','correo','tipo_pago','nss','cuenta','banco','num_fonacot','tipo_sangre','num_issste','fecha_ingreso'];
 	protected $table = 'empleado';
 	protected $primaryKey='rfc';
-	public $timestamps = false;
 
 	public $tipos=['H'=>'HONORARIOS','B'=>'BASE','C'=>'CONFIANZA'];
 
@@ -35,7 +34,7 @@ class Empleado extends Model {
 	public function getPlazaActualAttribute()
 	{
 		# Regresa el nombre de la plaza
-		return $this->datosLaborales()->whereNull('fin')->first()->plaza;
+		return $this->datosLaborales()->whereNull('fin')->first();
 	}
 
 	public function getNombreCompletoAttribute()
@@ -75,15 +74,24 @@ class Empleado extends Model {
 			return $pagos[$this->tipo_pago];
 	}
 
+	public function setMaternoAttribute($materno)
+	{
+		# asigna el valor del segun apellido
+		if($materno==null or $materno=='? object:null ?'){
+			$materno='';
+		}
+		$this->attributes['materno']=$materno;
+	}
+
 
 
 	public function setBancoAttribute($banco)
 	{
 			# asigna el valor del banco
-			if($banco==''){
+			if($banco=='' or $banco=='? object:null ?'){
 				$banco=null;
 			}
-			$this->banco=$banco;
+			$this->attributes['banco']=$banco;
 	}
 
 

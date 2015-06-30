@@ -1,9 +1,13 @@
 
   <div>
+    @if(isset($editar) && $empleado->tipo!='H')
     <legend class="text-muted">Datos laborales</legend>
-    @if(!isset($editar))
     <div class="row">
+    @endif
 
+    @if(!isset($editar))
+    <legend class="text-muted">Datos laborales</legend>
+    <div class="row">
       <div class="form-group col-md-5">
         <label>Tipo de Empleado*</label>
         <div>
@@ -19,18 +23,29 @@
         </div>
       </div>
 
-      <div class="form-group col-md-3">
-        <label class="control-label">Número de empleado*</label>
-        <input type="text" name="num_empleado" id="num_empleado" class="form-control" required maxlength="10" ng-model="empleado.num_empleado" ng-change="cargo.num_empleado=empleado.num_empleado" MAYUS>
-      </div>
       <div class="form-group col-md-4">
         <label class="control-label">Fecha de Ingreso*</label>
         <div class="input-group date">
           <input type="text" class="form-control"placeholder="aaaa/mm/dd" title="Ingreso como trabajador" name="fecha_ingreso" id="fingreso" ng-model="empleado.fecha_ingreso" required ng-change="cargo.inicio=empleado.fecha_ingreso"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         </div>
       </div>
-    </div>
     @endif
+  </div>
+    <div class="row" ng-hide="empleado.tipo=='H'">
+      <div class="form-group col-md-4">
+        <label class="control-label">Número de Seguro Social</label>
+        <input type="text" name="nss" id="nss" class="form-control" placeholder="NSS" ng-model="empleado.nss">
+      </div>
+      <div class="form-group col-md-4">
+        <label class="control-label">Número de Fonacot</label>
+        <input type="text" name="num_fonacot" id="nfonacot" class="form-control" placeholder="Número de fonacot" ng-model="empleado.num_fonacot">
+      </div>
+      <div class="form-group col-md-4">
+        <label class="control-label">Número de ISSSTE</label>
+        <input type="text" name="num_issste" id="nissste" class="form-control" placeholder="Número de ISSSTE" ng-model="empleado.num_issste">
+      </div>
+    </div>
+    <legend class="text-muted">Pago</legend>
     <div class="row">
       <div class="form-group col-md-4">
         <label class="control-label">Tipo de Pago*</label>
@@ -55,23 +70,16 @@
         <input type="text" name="cuentac" id="cuentac" class="form-control" placeholder="Número de cuenta CLABE" ng-model="empleado.cuentaclabe" minlength="18" maxlength="18" ng-disabled="!empleado.banco" solonumeros>
       </div>
     </div>
-    <div class="row" ng-hide="empleado.tipo=='H'">
-      <div class="form-group col-md-4">
-        <label class="control-label">Número de Seguro Social</label>
-        <input type="text" name="nss" id="nss" class="form-control" placeholder="NSS" ng-model="empleado.nss">
-      </div>
-      <div class="form-group col-md-4">
-        <label class="control-label">Número de Fonacot</label>
-        <input type="text" name="num_fonacot" id="nfonacot" class="form-control" placeholder="Número de fonacot" ng-model="empleado.num_fonacot">
-      </div>
-      <div class="form-group col-md-4">
-        <label class="control-label">Número de ISSSTE</label>
-        <input type="text" name="num_issste" id="nissste" class="form-control" placeholder="Número de ISSSTE" ng-model="empleado.num_issste">
-      </div>
-    </div>
-    @if(!isset($editar))
-    <fieldset>
-      <legend class="text-muted">Datos de la plaza</legend>
+
+      @if(!isset($editar))
+      <fieldset>
+        <legend class="text-muted">Datos de la plaza</legend>
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label class="control-label">Número de empleado*</label>
+            <input type="text" name="num_empleado" id="num_empleado" class="form-control" required maxlength="10" ng-model="empleado.num_empleado" ng-change="cargo.num_empleado=empleado.num_empleado" MAYUS>
+          </div>
+        </div>
       <div class="row">
         <div class="form-group col-md-2">
           <label class="control-label">Clave*</label>
@@ -160,23 +168,6 @@
         </div>
       </div>
       -->
-    </fieldset>
     @endif
-    @if(isset($editar))
-      <div class="row">
-        <div class="form-group col-md-4">
-          <label class="control-label">Horario</label>
-          <select name="horario" id="horario" class="form-control" ng-model="horario">
-            <option value="">-- Seleccione --</option>
-            @foreach($horarios as $h)
-            @if(isset($h->hora_salida_comida))
-            <option value="{{ $h->id }}">{{ date('H:i',strtotime($h->hora_entrada))." a ".date('H:i',strtotime($h->hora_salida_comida))." hrs. -- ".date('H:i',strtotime($h->hora_entrada_comida))." a ".date('H:i',strtotime($h->hora_salida)).' hrs.' }}</option>
-            @else
-            <option value="{{ $h->id }}">{{ date('H:i',strtotime($h->hora_entrada))." a ".date('H:i',strtotime($h->hora_salida))." hrs." }}</option>
-            @endif
-            @endforeach
-          </select>
-        </div>
-      </div>
-    @endif
+  </fieldset>
   </div>

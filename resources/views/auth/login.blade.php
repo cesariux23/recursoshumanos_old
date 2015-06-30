@@ -8,7 +8,7 @@
 				<div class="panel-heading">Login</div>
 				<div class="panel-body">
 					<img src="{{ asset('/images/ivea.jpg') }}" alt="" class="center-block"/>
-					<h1 class="text-center text-muted">Sistema Integral de Recursos Humanos</h1>
+					<h3 class="text-center text-muted">Sistema Integral de Recursos Humanos</h3>
 					<br>
 					@if (count($errors) > 0)
 						<div class="row">

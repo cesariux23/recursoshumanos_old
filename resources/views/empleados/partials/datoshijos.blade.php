@@ -8,13 +8,12 @@
   </div>
   <div class="well" ng-show="hijosform">
     @include('hijos.form')
-    <button type="button" class="btn btn-primary" ng-click="addhijo()" ng-disabled="!hijo.nombre"><i class="fa fa-save"></i> Agregar</button>
+    <button type="button" class="btn btn-primary" ng-click="addhijo()" ng-disabled="!hijo.sexo || !hijo.fecha_nac || !hijo.nombre"><i class="fa fa-save"></i> Agregar</button>
   </div>
   <table class="table table-hover table-bordered" ng-show="hijos.length>0">
     <thead>
       <tr>
         <th>Nombre</th>
-        <th>CURP</th>
         <th>Fecha nacimiento</th>
         <th>Sexo</th>
         <th></th>
@@ -23,7 +22,6 @@
     <tbody>
       <tr ng-repeat="h in hijos">
         <td><%h.nombre%></td>
-        <td><%h.curp%></td>
         <td><%h.fecha_nac%></td>
         <td><%h.sexo%></td>
         <th><button type="button" class="btn btn-danger" ng-click="borrar($index)" title="Borrar"> <i class="fa fa-trash"></i> </button></th>

@@ -64,7 +64,7 @@
 
         </td>
         <td>
-          {{ $e->descripcion }}
+          {{ $e->num_empleado }} -- {{ $e->descripcion }}
           <br>
           <span class="text-muted">{{ $e->adscripcion }}</span>
         </td>

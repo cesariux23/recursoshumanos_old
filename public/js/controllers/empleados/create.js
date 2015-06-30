@@ -15,7 +15,7 @@ angular.module('RecursosHumanosApp')
 	$scope.datos={estado_civil:0,tiene_hijos:false, hijos:0, hijosmenores:0};
 	$scope.cargo={tipo:'H',ocupacion:false, inicio:$scope.hoy};
 
-	$scope.empleado={tipo:'H',tipo_pago:0, hijosmenores:false,estado:0,fecha_ingreso:$scope.hoy};
+	$scope.empleado={tipo:'H',tipo_pago:1, hijosmenores:false,estado:0,fecha_ingreso:$scope.hoy};
 	$scope.panel=1;
 	$scope.sph='----';
 

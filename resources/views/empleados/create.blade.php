@@ -152,11 +152,12 @@
 							<p><b>RFC</b>: <%empleado.rfc%></p>
 							<p ng-show="empleado.homoclave!=''"><b>Homoclave</b>: <%empleado.homoclave%></p>
 							<p><b>Nombre</b>: <%empleado.nombre%></p>
-							<p><b>A. Paterno</b>: <%empleado.paterno%></p>
-							<p><b>A. Materno</b>: <%empleado.materno%></p>
+							<p><b>Primer Apellido</b>: <%empleado.paterno%></p>
+							<p><b>Segundo Apellid</b>: <%empleado.materno%></p>
 							<p><b>CURP</b>: <%empleado.curp%></p>
 							<p><b>Fecha de nacimiento</b>: <%empleado.fecha_nacimiento%></p>
 							<p><b>Sexo</b>: <%empleado.sexo%></p>
+							<p><b>Fecha de ingreso</b>: <%empleado.fecha_ingreso%></p>
 						</div>
 						<p>¿Esta seguro que desea continuar?</b></p>
 					</div>
@@ -167,8 +168,10 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
+		<%registro.$error%>
 		{!! Form::close() !!}
 	</div>
+
 </div>
 
 @endsection

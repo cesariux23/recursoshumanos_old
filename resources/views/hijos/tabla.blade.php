@@ -18,7 +18,7 @@
 			<tr {{$h->edad<17? 'class="warning"':''}}>
 				<td>{{$h->nombre}}</td>
 				<td>{{$h->fechaNacimiento}}</td>
-				<td>{{$h->edad}} año(s)</td>
+				<td><b>{{$h->edad}}</b> años</td>
 
 				@if(isset($edit))
 				<td>

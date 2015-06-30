@@ -38,15 +38,38 @@
           <p class="col-xs-4">Número de Empleado<br><b>{{ $empleado->num_empleado }}</b></p>
           <p class="col-xs-4">Fecha de Ingreso<br><b>{{ $empleado->fechaIng }}</b></p>
         </div>
+
+
+        @if(isset($empleado->plazaActual))
+        <div class="row">
+          <p class="col-xs-4">Puesto<br><b>{{$empleado->plazaActual->plaza }}</b></p>
+          <p class="col-xs-6">Adscripción<br><b>{{ $empleado->plazaActual->nombreadscripcion }}</b></p>
+          <p class="col-xs-2">Desde<br><b>{{ $empleado->plazaActual->fechaInicio }}</b></p>
+        </div>
+        @else
+        <div class="alert alert-warning">
+          <p>
+            <i class="fa fa-info-circle fa-2x"></i> No se ha registrado el puesto
+          </p>
+        </div>
+        @endif
+
         <div class="row">
           <p class="col-xs-4">Tipo de Pago<br><b>{{ $empleado->pago }}</b></p>
           @if($empleado->tipo_pago==0)
-          <p class="col-xs-4">Banco<br><b>{{ $empleado->catbanco->banco}}</b></p>
+          <p class="col-xs-4">Banco<br><b>{{ $empleado->banco? $empleado->catbanco->banco : '--'}}</b></p>
           <p class="col-xs-4">Cuenta<br><b>{{ $empleado->cuenta }}</b></p>
           @endif
         </div>
-        
-        <legend class="text-muted">Datos Personales</legend>
+
+        <br>
+        <div class="text-muted">
+          <div class="pull-right">
+            Última actualización: {{$empleado->datos->updated_at}}
+          </div>
+          <legend class="text-muted">Datos Personales</legend>
+        </div>
+
         <p>Dirección<br><b>{{$empleado->datos->direccion}}</b></p>
         <div class="row">
           <p class="col-md-5 col-xs-5">Colonia<br><b>{{ $empleado->datos->colonia}}</b></p>
@@ -77,10 +100,12 @@
           @endif
         </div>
 
+
         @if(count($empleado->hijos)>0)
+        <br>
         @include('hijos.tabla',['hijos'=>$empleado->hijos])
         @endif
-
+        <br>
         <legend>Formación</legend>
         <div class="row">
           @if($empleado->datos->escolaridad<=2 || $empleado->datos->escolaridad==6)
@@ -126,40 +151,9 @@
             </tr>
           </tbody>
         </table>
-
         <div>
-          <div class="pull-right">
-            <button class="btn btn-warning hidden-print"> <i class="fa fa-edit"></i> Editar datos laborales</button>
-          </div>
-          <legend class="text-muted">Historial Laboral</legend>
+
         </div>
-        <br>
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Periodo</th>
-              <th>Adscripción</th>
-              <th>Plaza</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach($empleado->datosLaborales as $dl)
-            <tr>
-              <td>{{$dl->inicio}} -- {{$dl->fin==null? 'Actualidad':$dl->fecha_ingreso }}</td>
-              <td>
-                {{$dl->catadscripcion->adscripcion}}
-                @if($dl->ocupacion==1)
-                <p><span class="label label-warning">Interinato</span></p>
-                @endif
-              </td>
-              <td>{{$dl->catplaza->descripcion}}</td>
-            </tr>
-
-
-            @endforeach
-
-          </tbody>
-        </table>
       </div>
 
     </div>

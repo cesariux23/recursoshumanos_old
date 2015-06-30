@@ -13,10 +13,10 @@
     <label>Sexo*</label>
     <div>
       <label class="radio-inline">
-        <input type="radio" value="M" ng-model="hijo.sexo"> Masculino
+        <input type="radio" value="H" ng-model="hijo.sexo"> Hombre
       </label>
       <label class="radio-inline">
-        <input type="radio" value="F" ng-model="hijo.sexo"> Femenino
+        <input type="radio" value="M" ng-model="hijo.sexo"> Mujer
       </label>
     </div>
   </div>

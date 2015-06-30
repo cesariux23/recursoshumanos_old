@@ -62,6 +62,4 @@
 </div>
 
 </div>
-
-<%registro.$error%>
 @stop

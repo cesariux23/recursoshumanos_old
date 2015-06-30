@@ -41,6 +41,10 @@ Route::resource('nominas', 'NominasController');
 //reportes
 Route::resource('reportes', 'ReportesController');
 
+//reportes
+Route::resource('plazas', 'PlazasController');
+
+
 //Solicitud Banco
 Route::get('reportes/generarsolicitudbanco/{rfc}',	'ReportesController@generaSolicitudBanco');
 Route::resource('hijos', 'HijosController');

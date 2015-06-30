@@ -5,7 +5,6 @@
       (!registro.rfc.$valid ||
       !registro.curp.$valid ||
       !registro.paterno.$valid ||
-      !registro.materno.$valid ||
       !registro.nombre.$valid ||
       !registro['datos[hijos]'].$valid ||
       !registro['datos[hijosmenores]'].$valid ||
@@ -16,7 +15,6 @@
     @else
       ng-show="panel==1 &&
       (!registro.paterno.$valid ||
-      !registro.materno.$valid ||
       !registro.nombre.$valid ||
       !registro['datos[hijos]'].$valid ||
       !registro['datos[hijosmenores]'].$valid ||
@@ -104,16 +102,29 @@
   </div>
 
   <div class="alert alert-warning"
+    @if(!isset($editar))
+      ng-show="panel==3 && (
+      !registro.num_empleado.$valid ||
+      !registro.banco.$valid ||
+      !registro.cuenta.$valid ||
+      !registro.fecha_ingreso.$valid ||
+      !registro.adscripcion.$valid ||
+      !registro.horario.$valid ||
+      !registro.finicio.$valid ||
+      !plaza.clave
+      )"
+    @else
     ng-show="panel==3 && (
     !registro.num_empleado.$valid ||
     !registro.banco.$valid ||
     !registro.cuenta.$valid ||
     !registro.fecha_ingreso.$valid ||
     !registro.adscripcion.$valid ||
-    !registro.sueldo.$valid ||
     !registro.horario.$valid ||
     !registro.finicio.$valid
-    )">
+    )"
+    @endif
+    >
     <i>Verifique los siguientes datos:</i>
     @if(!isset($editar))
     <div ng-show="!registro.num_empleado.$valid">
@@ -152,17 +163,10 @@
         <div ng-messages="registro.adscripcion.$error" ng-messages-include="errores">
         </div>
       </div>
-      <div ng-show="!plaza">
+      <div ng-show="!plaza.clave">
         <b>Plaza</b>
         <div>Seleccione una plaza.</div>
       </div>
-      <!--
-      <div ng-show="!registro.sueldo.$valid">
-      <b>Sueldo bruto mensual</b>
-      <div ng-messages="registro.sueldo.$error" ng-messages-include="errores">
-      </div>
-      </div>
-      -->
     @endif
     <div ng-show="!registro.horario.$valid">
       <b>Horario</b>
@@ -176,13 +180,26 @@
         <div ng-messages="registro.finicio.$error" ng-messages-include="errores">
         </div>
       </div>
+
     @endif
   </div>
 
   <div class="alert alert-warning"
     ng-show="panel==4 &&
-    hijosform && !hijo.nombre">
+    hijosform && (!hijo.nombre || !hijo.sexo || !hijo.fecha_nac)">
     <i>Verifique los siguientes datos:</i>
+    <div>
+      <b>Nombre</b>
+      <br>
+      <i>Ingrese el nombre.</i>
+    </div>
+
+    <div>
+      <b>Sexo</b>
+      <br>
+      <i>Ingrese el nombre.</i>
+    </div>
+
     <div>
       <b>Nombre</b>
       <br>

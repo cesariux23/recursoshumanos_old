@@ -17,6 +17,7 @@
 .contenedor_datos{
 	border-left: #888;
 	border-left-style: solid;
+	min-height:700px;
 }
 .tab-content{
 	min-height: 270px;

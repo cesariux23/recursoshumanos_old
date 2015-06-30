@@ -12,11 +12,12 @@
         <input type="text" name="homo" id="homo" class="form-control mayus" ng-model="empleado.homoclave" maxlength="3" >
       </div>
 
-      @if(!isset($editar))
+
       <div class="form-group col-md-3">
         <label class="control-label">CURP*</label>
         <input type="text" name="curp" id="curp" class="form-control mayus" placeholder="CURP a 18 caracteres" ng-model="empleado.curp" required minlength="18" pattern="^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$" maxlength="18" ng-blur="llenagenero()">
       </div>
+      @if(!isset($editar))
       <div class="form-group col-md-3" ng-show="empleado.fecha_nacimiento">
         <label class="control-label">Fecha de Nacimiento</label>
         <br>
@@ -81,7 +82,7 @@
             <input type="radio" name="datos[hijosmenores]" ng-model="datos.hijosmenores" ng-value="1" ng-required="datos.hijos"> Sí
           </label>
           <label class="radio-inline">
-            <input type="radio" name="datos[hijosmenores]" ng-model="datos.hijosmenores" ng-value="0" ng-required="datos.hijos"> No
+            <input type="radio" name="datos[hijosmenores]" ng-model="datos.hijosmenores" ng-value="0" ng-required="datos.hijos" ng-click="hijosform=false"> No
           </label>
         </div>
       </div>
