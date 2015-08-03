@@ -58,13 +58,17 @@
       @foreach($empleados as $e)
       <tr>
         <td>
-          {{ $e->nombre_completo }}
-          <br>
-          <b>{{ $e->rfc }}</b>
 
+          <b>{{ $e->nombre_completo }}</b>
+          <br>
+          {{ $e->rfc }}<span class="text-primary">{{ $e->homoclave}}</span>
+          <br>
+          {{ $e->tipoEmpleado}}
         </td>
         <td>
-          {{ $e->num_empleado }} -- {{ $e->descripcion }}
+          <b>{{ $e->descripcion }}</b>
+          <br>
+          {{ $e->num_empleado }}
           <br>
           <span class="text-muted">{{ $e->adscripcion }}</span>
         </td>

@@ -53,7 +53,7 @@ class EmpleadosController extends Controller {
 		Logs::create(array('idsesion'=>Session::get('sesion'),'idaccion'=>20,'tabla'=>'empleado'));
 		$adscripciones = [''=>'-- Todas las adcripciones --']+Adscripcion::lists('adscripcion','id');
 		$empleados=DetalleEmpleado::rfc($request->input('rfc'))->nombre($request->input('nombre'))->adscripcion($request->input('adscripcion'))->paginate(20);
-		$empleados->setPath('public/empleados');
+		//$empleados->setPath('public/empleados');
 		return view('empleados.index',compact('adscripciones','empleados'));
 	}
 

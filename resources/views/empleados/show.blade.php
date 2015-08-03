@@ -4,10 +4,11 @@
 <div class="container">
   <div>
     <div class="pull-right hidden-print">
-      <a href="{{ route('empleados.index') }}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Volver</a>
-      <a href="{{ route('empleados.edit',$empleado->rfc) }}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar</a>
+      <a href="{{ route('empleados.index') }}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Volver al listado</a>
+      <a href="{{ route('empleados.edit',$empleado->rfc) }}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar datos personales</a>
+      <a href="{{ route('plazas.edit',$empleado->rfc) }}" class="btn btn-default"><i class="fa fa-clock-o"></i> Historial laboral</a>
       <a href="{{ route('hijos.show',$empleado->rfc) }}" class="btn btn-default"><i class="fa fa-child"></i> Hijos</a>
-      <button type="submit" class="btn btn-primary" onclick="window.print()"><i class="fa fa-print"></i> Imprimir</button>
+      <button type="submit" class="btn btn-default" onclick="window.print()"><i class="fa fa-print"></i> Imprimir</button>
     </div>
     <div class="row visible-print">
       <div class="col-xs-3">

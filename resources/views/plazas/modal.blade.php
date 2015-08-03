@@ -6,7 +6,7 @@
         <h4 class="modal-title" id="titulomodal">Corregir puesto actual</h4>
       </div>
       <div class="modal-body">
-        <div class="alert alert-warning">
+        <div class="alert alert-warning" ng-show="modificacion">
           <div class="row">
             <div class="col-xs-1">
               <br>

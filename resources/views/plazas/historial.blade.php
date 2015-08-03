@@ -1,7 +1,7 @@
 
 <div>
   <div class="pull-right">
-    <button type="button" class="btn btn-success">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalplaza" ng-click="modificacion=false;">
       <i class="fa fa-plus-circle"></i>
       Agregar histórico
     </button>

@@ -4,7 +4,7 @@
 
 	<div>
 		<div class="pull-right">
-			<a href="{{ route('empleados.show',$empleado->rfc) }}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Volver al cardex</a>
+			<a href="{{ route('empleados.show',$empleado->rfc) }}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Ir al cardex</a>
 		</div>
 		<h1>Hijos</h1>
 	</div>

@@ -91,7 +91,7 @@ class CatalogosController extends Controller {
 				break;
 				case 'adscripciones':
 					$datos=Adscripcion::paginate();
-					$datos->setPath('public/catalogos/adscripciones');
+					//$datos->setPath('public/catalogos/adscripciones');
 
 					break;
 			case 'horarios':
